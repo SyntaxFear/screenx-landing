@@ -609,7 +609,7 @@ code {
 @media (max-width: 680px) {
   .site-header,
   .archive-header {
-    width: min(100% - 28px, 1180px);
+    width: min(1180px, calc(100% - 28px));
   }
 
   .site-nav {
@@ -620,7 +620,7 @@ code {
   .section-inner,
   .archive-hero,
   .archive-list {
-    width: min(100% - 28px, 1180px);
+    width: min(1180px, calc(100% - 28px));
   }
 
   .hero-section {
