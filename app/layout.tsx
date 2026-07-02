@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const siteURL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://screenx.vercel.app";
+const siteURL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://screenx-landing.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteURL),
