@@ -1,0 +1,32 @@
+{
+  "name": "screenx-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page, public downloads, and update feed for ScreenX.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "deploy:production": "vercel deploy --prod --yes"
+  },
+  "dependencies": {
+    "clsx": "2.1.1",
+    "lucide-react": "1.23.0",
+    "next": "16.2.10",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.2",
+    "@types/node": "26.1.0",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.38.0",
+    "eslint-config-next": "16.2.10",
+    "tailwindcss": "4.3.2",
+    "typescript": "6.0.3"
+  },
+  "packageManager": "pnpm@11.7.0"
+}
