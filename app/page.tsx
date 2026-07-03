@@ -111,7 +111,7 @@ const interfaceScreens = [
     title: "Arrange",
     label: "Build the canvas",
     description: "Create the grid for each display, choose fast presets, and set gaps before placing windows.",
-    bestPractice: "Use 3 x 1 for wide monitors, 1 x 2 for vertical displays, and 0 px gaps when you want edge-to-edge tiling.",
+    bestPractice: "Start with the default 2 x 1 split for side-by-side work, then switch to 3 x 1 for ultrawide screens or 1 x 2 for vertical displays.",
     src: "/images/screens/screenx-arrange.png",
     alt: "ScreenX Arrange screen showing preset layouts, display profiles, and custom grid controls.",
   },
@@ -251,7 +251,7 @@ export default function Home() {
           </div>
           <div className="stage-pill stage-pill-grid">
             <Grid3X3 size={17} />
-            3 x 1 canvas
+            2 x 1 canvas
           </div>
           <div className="stage-measure">
             <span>Placement</span>
@@ -368,36 +368,65 @@ export default function Home() {
           </Reveal>
 
           <Reveal className="interface-stage" aria-label="ScreenX application screenshots">
-            <figure className="interface-window interface-window-featured">
-              <Image
-                src={interfaceScreens[0].src}
-                alt={interfaceScreens[0].alt}
-                width={1188}
-                height={854}
-                sizes="(max-width: 980px) 100vw, 820px"
-              />
-              <figcaption>
-                <strong>{interfaceScreens[0].title}</strong>
-                <span>{interfaceScreens[0].description}</span>
-              </figcaption>
-            </figure>
+            <div className="interface-stage-shell">
+              <div className="interface-tabs" aria-hidden="true">
+                {interfaceScreens.map((screen, index) => (
+                  <span className={index === 0 ? "is-active" : undefined} key={screen.title}>
+                    {screen.title}
+                  </span>
+                ))}
+              </div>
 
-            <div className="interface-window-stack" aria-label="Additional ScreenX screens">
-              {interfaceScreens.slice(1).map((screen) => (
-                <figure className="interface-window interface-window-compact" key={screen.title}>
-                  <Image
-                    src={screen.src}
-                    alt={screen.alt}
-                    width={1188}
-                    height={854}
-                    sizes="(max-width: 980px) 100vw, 430px"
-                  />
-                  <figcaption>
-                    <strong>{screen.title}</strong>
-                    <span>{screen.description}</span>
-                  </figcaption>
-                </figure>
-              ))}
+              <div className="interface-showcase-grid">
+                <div className="interface-feature-column">
+                  <figure className="interface-window interface-window-featured">
+                    <Image
+                      src={interfaceScreens[0].src}
+                      alt={interfaceScreens[0].alt}
+                      width={1188}
+                      height={854}
+                      sizes="(max-width: 980px) 100vw, 820px"
+                    />
+                    <figcaption>
+                      <strong>{interfaceScreens[0].title}</strong>
+                      <span>{interfaceScreens[0].description}</span>
+                    </figcaption>
+                  </figure>
+
+                  <div className="interface-metric-row" aria-label="ScreenX default setup">
+                    <span>
+                      <strong>2 x 1</strong>
+                      Default grid
+                    </span>
+                    <span>
+                      <strong>0 px</strong>
+                      Edge fit
+                    </span>
+                    <span>
+                      <strong>Command</strong>
+                      Drag preview
+                    </span>
+                  </div>
+                </div>
+
+                <div className="interface-window-stack" aria-label="Additional ScreenX screens">
+                  {interfaceScreens.slice(1).map((screen) => (
+                    <figure className="interface-window interface-window-compact" key={screen.title}>
+                      <Image
+                        src={screen.src}
+                        alt={screen.alt}
+                        width={1188}
+                        height={854}
+                        sizes="(max-width: 980px) 100vw, 430px"
+                      />
+                      <figcaption>
+                        <strong>{screen.title}</strong>
+                        <span>{screen.description}</span>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </div>
             </div>
           </Reveal>
 

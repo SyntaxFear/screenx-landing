@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 type MotionBlockProps = {
@@ -14,39 +14,20 @@ type MotionBlockProps = {
 
 const viewport = { once: true, amount: 0.08 };
 
-function useCanAnimate() {
-  const shouldReduceMotion = useReducedMotion();
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      setHasMounted(true);
-    });
-
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
-  return hasMounted && !shouldReduceMotion;
-}
-
 export function HeroReveal({ children, delay = 0, className, ...props }: MotionBlockProps) {
-  const canAnimate = useCanAnimate();
-
-  if (!canAnimate) {
-    return (
-      <div className={className} {...props}>
-        {children}
-      </div>
-    );
-  }
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.div
       key="hero-reveal-motion"
       className={className}
-      initial={{ opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 28, filter: "blur(10px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0.35, delay, ease: [0.22, 1, 0.36, 1] }
+          : { type: "spring", stiffness: 92, damping: 22, mass: 0.9, delay }
+      }
       {...props}
     >
       {children}
@@ -55,24 +36,20 @@ export function HeroReveal({ children, delay = 0, className, ...props }: MotionB
 }
 
 export function Reveal({ children, delay = 0, className, ...props }: MotionBlockProps) {
-  const canAnimate = useCanAnimate();
-
-  if (!canAnimate) {
-    return (
-      <div className={className} {...props}>
-        {children}
-      </div>
-    );
-  }
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.div
       key="reveal-motion"
       className={className}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 46, filter: "blur(12px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={viewport}
-      transition={{ duration: 0.62, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0.3, delay, ease: [0.22, 1, 0.36, 1] }
+          : { type: "spring", stiffness: 88, damping: 24, mass: 0.85, delay }
+      }
       {...props}
     >
       {children}
@@ -81,15 +58,7 @@ export function Reveal({ children, delay = 0, className, ...props }: MotionBlock
 }
 
 export function Stagger({ children, delay = 0, className, ...props }: MotionBlockProps) {
-  const canAnimate = useCanAnimate();
-
-  if (!canAnimate) {
-    return (
-      <div className={className} {...props}>
-        {children}
-      </div>
-    );
-  }
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.div
@@ -104,7 +73,7 @@ export function Stagger({ children, delay = 0, className, ...props }: MotionBloc
           opacity: 1,
           transition: {
             delayChildren: delay,
-            staggerChildren: 0.08,
+            staggerChildren: shouldReduceMotion ? 0.04 : 0.08,
           },
         },
       }}
@@ -116,26 +85,22 @@ export function Stagger({ children, delay = 0, className, ...props }: MotionBloc
 }
 
 export function StaggerItem({ children, className, ...props }: Omit<MotionBlockProps, "delay">) {
-  const canAnimate = useCanAnimate();
-
-  if (!canAnimate) {
-    return (
-      <div className={className} {...props}>
-        {children}
-      </div>
-    );
-  }
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.div
       key="stagger-item-motion"
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 24 },
+        hidden: shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 34, scale: 0.98, filter: "blur(10px)" },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.56, ease: [0.22, 1, 0.36, 1] },
+          scale: 1,
+          filter: "blur(0px)",
+          transition: shouldReduceMotion
+            ? { duration: 0.26, ease: [0.22, 1, 0.36, 1] }
+            : { type: "spring", stiffness: 110, damping: 23, mass: 0.8 },
         },
       }}
       {...props}

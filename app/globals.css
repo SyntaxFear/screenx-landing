@@ -782,16 +782,12 @@ dd {
 
 .interface-stage {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.36fr) minmax(320px, 0.74fr);
-  gap: 18px;
-  align-items: start;
-  margin-top: 30px;
+  margin-top: 34px;
 }
 
 .interface-stage::before {
   position: absolute;
-  inset: 22px -18px 22px;
+  inset: 54px -18px -18px;
   z-index: 0;
   content: "";
   background:
@@ -803,6 +799,75 @@ dd {
   mask-image: linear-gradient(180deg, transparent, black 16%, black 84%, transparent);
 }
 
+.interface-stage-shell {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(30, 36, 34, 0.96), rgba(47, 59, 54, 0.92) 52%, rgba(34, 42, 39, 0.96)),
+    linear-gradient(90deg, rgba(184, 219, 198, 0.18), rgba(182, 207, 232, 0.12));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  box-shadow: 0 34px 100px rgba(30, 36, 34, 0.26);
+}
+
+.interface-stage-shell::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(145deg, black, transparent 76%);
+  pointer-events: none;
+}
+
+.interface-tabs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.interface-tabs span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  color: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.interface-tabs .is-active {
+  color: var(--ink);
+  background: linear-gradient(180deg, rgba(184, 219, 198, 0.98), rgba(158, 191, 168, 0.88));
+  border-color: rgba(255, 255, 255, 0.36);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.interface-showcase-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.34fr) minmax(320px, 0.72fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.interface-feature-column {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
 .interface-window {
   position: relative;
   z-index: 1;
@@ -812,11 +877,24 @@ dd {
   overflow: hidden;
   margin: 0;
   padding: 10px 10px 12px;
-  background: rgba(255, 255, 255, 0.66);
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 8px;
-  box-shadow: var(--shadow-strong);
+  box-shadow: 0 22px 64px rgba(0, 0, 0, 0.24);
   backdrop-filter: blur(22px);
+}
+
+.interface-window::before {
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  height: 24px;
+  content: "";
+  background:
+    radial-gradient(circle at 14px 12px, var(--blush) 0 4px, transparent 5px),
+    radial-gradient(circle at 30px 12px, var(--blue) 0 4px, transparent 5px),
+    radial-gradient(circle at 46px 12px, var(--sage) 0 4px, transparent 5px);
+  opacity: 0.95;
 }
 
 .interface-window img {
@@ -833,6 +911,36 @@ dd {
   aspect-ratio: 1188 / 854;
 }
 
+.interface-window-featured {
+  animation: screenLift 8s ease-in-out infinite;
+}
+
+.interface-metric-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.interface-metric-row span {
+  display: grid;
+  gap: 4px;
+  min-height: 86px;
+  align-content: center;
+  padding: 14px;
+  color: rgba(255, 255, 255, 0.62);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.interface-metric-row strong {
+  color: white;
+  font-size: 18px;
+  font-weight: 900;
+}
+
 .interface-window-stack {
   position: relative;
   z-index: 1;
@@ -843,6 +951,7 @@ dd {
 
 .interface-window-compact {
   padding: 8px 8px 10px;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.18);
 }
 
 .interface-window-compact img {
@@ -860,11 +969,19 @@ dd {
   color: var(--ink);
 }
 
+.interface-stage-shell .interface-window figcaption strong {
+  color: rgba(255, 255, 255, 0.94);
+}
+
 .interface-window figcaption span,
 .screen-context-card p,
 .screen-context-best span {
   color: var(--slate);
   line-height: 1.45;
+}
+
+.interface-stage-shell .interface-window figcaption span {
+  color: rgba(255, 255, 255, 0.66);
 }
 
 .interface-window figcaption strong {
@@ -890,12 +1007,31 @@ dd {
   overflow: hidden;
   min-height: 318px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.68);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.66)),
+    linear-gradient(135deg, rgba(184, 219, 198, 0.18), rgba(182, 207, 232, 0.10));
   border: 1px solid rgba(255, 255, 255, 0.82);
   border-radius: 8px;
   box-shadow: 0 18px 54px rgba(30, 36, 34, 0.11);
   backdrop-filter: blur(18px);
+  contain: layout paint;
   transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.screen-context-card:nth-child(1) {
+  border-top: 3px solid var(--mint);
+}
+
+.screen-context-card:nth-child(2) {
+  border-top: 3px solid var(--blue);
+}
+
+.screen-context-card:nth-child(3) {
+  border-top: 3px solid var(--blush);
+}
+
+.screen-context-card:nth-child(4) {
+  border-top: 3px solid var(--sage);
 }
 
 .screen-context-card::after {
@@ -1379,14 +1515,14 @@ code {
   }
 }
 
-@keyframes interfaceFloat {
+@keyframes screenLift {
   0%,
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
 
   50% {
-    transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -6px, 0) scale(1.004);
   }
 }
 
@@ -1425,14 +1561,12 @@ code {
     justify-content: flex-start;
   }
 
-  .interface-stage {
-    display: grid;
-    gap: 16px;
-    grid-template-columns: 1fr;
-  }
-
   .interface-stage::before {
     display: none;
+  }
+
+  .interface-showcase-grid {
+    grid-template-columns: 1fr;
   }
 
   .interface-window-stack {
@@ -1591,6 +1725,10 @@ code {
   }
 
   .interface-window-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .interface-metric-row {
     grid-template-columns: 1fr;
   }
 

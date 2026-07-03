@@ -17,6 +17,27 @@ export type ScreenXRelease = {
 
 export const releases: ScreenXRelease[] = [
   {
+    version: "1.0.1",
+    build: "4",
+    date: "2026-07-03",
+    title: "ScreenX 1.0.1",
+    summary: "Refines the default canvas to a simple 2 x 1 layout and keeps previous custom display profiles intact.",
+    minMacOS: "13.0",
+    fileName: "ScreenX-1.0.1.dmg",
+    fileSizeBytes: 3652169,
+    sha256: "1fe68b7a856cbc210e24915e6b09fe9b017380f68b1906d53e837c4419e8a6b8",
+    notarized: true,
+    stapled: true,
+    downloadPath: "/releases/1.0.1/ScreenX-1.0.1.dmg",
+    releaseNotesPath: "/releases#version-1-0-1",
+    highlights: [
+      "New default display profile is 2 x 1 for clean side-by-side work.",
+      "Older untouched 3 x 1 and 3 x 2 default profiles migrate to the new default once.",
+      "Custom grids such as 2 x 2, 1 x 2, and per-display setups remain preserved.",
+      "Includes the latest signed, notarized, and stapled public DMG.",
+    ],
+  },
+  {
     version: "1.0.0",
     build: "3",
     date: "2026-07-03",
