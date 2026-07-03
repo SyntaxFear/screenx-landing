@@ -570,7 +570,7 @@ export default function Home() {
           <span>ScreenX</span>
         </div>
         <nav aria-label="Creator links">
-          <a href="https://github.com/SyntaxFear" rel="noreferrer" target="_blank">
+          <a href="https://github.com/SyntaxFear/screenX" rel="noreferrer" target="_blank">
             GitHub
             <ExternalLink size={14} aria-hidden="true" />
           </a>
