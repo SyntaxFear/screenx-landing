@@ -12,30 +12,57 @@ import {
   Monitor,
   MousePointer2,
   ShieldCheck,
+  Sparkles,
 } from "lucide-react";
-import { formatBytes, latestRelease, releaseId, releases } from "@/src/lib/releases";
+import { HeroReveal, Reveal, Stagger, StaggerItem } from "@/components/MotionPrimitives";
+import { formatBytes, latestRelease, releaseId } from "@/src/lib/releases";
 
 const featureCards = [
   {
     title: "Drag placement",
     description: "Hold Command, drag a window, preview the target area, and release to place it.",
     icon: MousePointer2,
+    accent: "mint",
   },
   {
     title: "Quick layouts",
     description: "Use hotkeys for halves, thirds, quarters, center, maximize, and two-thirds layouts.",
     icon: Keyboard,
+    accent: "blue",
   },
   {
     title: "Per-screen grids",
     description: "Give every connected display its own rows, columns, spacing, and canvas behavior.",
     icon: Grid3X3,
+    accent: "sage",
   },
   {
     title: "Saved workspaces",
     description: "Capture familiar arrangements and restore windows back into place later.",
     icon: Archive,
+    accent: "blush",
   },
+];
+
+const heroBadges = [
+  {
+    label: "Command-drag preview",
+    icon: MousePointer2,
+  },
+  {
+    label: "Per-screen profiles",
+    icon: Monitor,
+  },
+  {
+    label: "No Screen Recording",
+    icon: ShieldCheck,
+  },
+];
+
+const productSignals = [
+  ["Live preview", "See the target before release"],
+  ["Custom canvas", "Rows, columns, gaps per display"],
+  ["Fast restore", "Saved layouts for repeated work"],
 ];
 
 const workflow = [
@@ -70,13 +97,27 @@ export default function Home() {
           </nav>
         </header>
 
-        <div className="hero-content">
-          <p className="eyebrow">Native macOS window manager</p>
+        <HeroReveal className="hero-content">
+          <p className="eyebrow hero-eyebrow">
+            <Sparkles size={15} aria-hidden="true" />
+            Native macOS window manager
+          </p>
           <h1 id="hero-title">ScreenX</h1>
           <p className="hero-copy">
             Design your desktop canvas with quick layouts, per-screen grids, live drag previews,
             and saved workspaces across one monitor or many.
           </p>
+          <div className="hero-badges" aria-label="ScreenX highlights">
+            {heroBadges.map((badge) => {
+              const Icon = badge.icon;
+              return (
+                <span key={badge.label}>
+                  <Icon size={16} aria-hidden="true" />
+                  {badge.label}
+                </span>
+              );
+            })}
+          </div>
           <div className="hero-actions" aria-label="Download actions">
             <Link className="button button-primary" href="/download">
               <Download size={18} aria-hidden="true" />
@@ -101,35 +142,80 @@ export default function Home() {
               <dd>{formatBytes(latestRelease.fileSizeBytes)} MB</dd>
             </div>
           </dl>
-        </div>
+        </HeroReveal>
+
+        <HeroReveal className="hero-stage" delay={0.18} aria-hidden="true">
+          <div className="stage-window">
+            <div className="stage-toolbar">
+              <span />
+              <span />
+              <span />
+              <strong>ScreenX Canvas</strong>
+            </div>
+            <div className="stage-grid">
+              <div className="stage-cell stage-cell-muted" />
+              <div className="stage-cell stage-cell-active">
+                <span>Preview</span>
+              </div>
+              <div className="stage-cell stage-cell-blue" />
+              <div className="stage-cell stage-cell-wide">
+                <span>Saved workspace</span>
+              </div>
+              <div className="stage-cell stage-cell-sage" />
+            </div>
+            <div className="stage-cursor">
+              <MousePointer2 size={18} />
+            </div>
+          </div>
+          <div className="stage-pill stage-pill-hotkey">
+            <Command size={17} />
+            Hold Command
+          </div>
+          <div className="stage-pill stage-pill-grid">
+            <Grid3X3 size={17} />
+            3 x 1 canvas
+          </div>
+          <div className="stage-measure">
+            <span>Placement</span>
+            <strong>Left 33%</strong>
+          </div>
+        </HeroReveal>
       </section>
 
       <section id="features" className="section section-light">
         <div className="section-inner">
-          <div className="section-heading">
+          <Reveal className="section-heading">
             <p className="eyebrow">Main features</p>
             <h2>Everything stays fast, visible, and under your control.</h2>
-          </div>
-          <div className="feature-grid">
+          </Reveal>
+          <Reveal className="signal-row">
+            {productSignals.map(([label, value]) => (
+              <div key={label}>
+                <span>{label}</span>
+                <strong>{value}</strong>
+              </div>
+            ))}
+          </Reveal>
+          <Stagger className="feature-grid" delay={0.08}>
             {featureCards.map((feature) => {
               const Icon = feature.icon;
               return (
-                <article className="feature-card" key={feature.title}>
+                <StaggerItem className={`feature-card feature-card-${feature.accent}`} key={feature.title}>
                   <div className="icon-surface">
                     <Icon size={24} aria-hidden="true" />
                   </div>
                   <h3>{feature.title}</h3>
                   <p>{feature.description}</p>
-                </article>
+                </StaggerItem>
               );
             })}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       <section id="how-it-works" className="section section-canvas">
         <div className="section-inner split-layout">
-          <div className="copy-column">
+          <Reveal className="copy-column">
             <p className="eyebrow">Workspace canvas</p>
             <h2>Shape each display around the way you actually work.</h2>
             <p>
@@ -151,8 +237,8 @@ export default function Home() {
                 Local window control
               </span>
             </div>
-          </div>
-          <div className="workspace-visual" aria-label="ScreenX grid placement preview">
+          </Reveal>
+          <Reveal className="workspace-visual" aria-label="ScreenX grid placement preview">
             <div className="visual-toolbar">
               <span />
               <span />
@@ -166,13 +252,17 @@ export default function Home() {
               <div className="visual-cell wide">Saved workspace</div>
               <div className="visual-cell">Guide</div>
             </div>
-          </div>
+            <div className="visual-cursor">
+              <MousePointer2 size={17} aria-hidden="true" />
+              Drop preview
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <section id="install" className="section section-install">
         <div className="section-inner install-layout">
-          <div>
+          <Reveal>
             <p className="eyebrow">Install</p>
             <h2>Download, drag to Applications, then start arranging.</h2>
             <ol className="install-steps">
@@ -183,8 +273,8 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-          </div>
-          <div className="installer-preview">
+          </Reveal>
+          <Reveal className="installer-preview">
             <Image
               src="/images/dmg-installer-background.png"
               alt="ScreenX drag-to-Applications installer background"
@@ -192,13 +282,13 @@ export default function Home() {
               height={480}
               sizes="(max-width: 900px) 100vw, 520px"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="section section-release">
         <div className="section-inner release-layout">
-          <div>
+          <Reveal>
             <p className="eyebrow">Latest release</p>
             <h2>{latestRelease.title}</h2>
             <p>{latestRelease.summary}</p>
@@ -216,8 +306,8 @@ export default function Home() {
                 SHA256 published
               </span>
             </div>
-          </div>
-          <div className="release-panel" id={releaseId(latestRelease.version)}>
+          </Reveal>
+          <Reveal className="release-panel" id={releaseId(latestRelease.version)}>
             <div className="release-panel-header">
               <Image src="/images/screenx-icon.png" alt="" width={48} height={48} />
               <div>
@@ -236,7 +326,7 @@ export default function Home() {
                 <ChevronRight size={18} aria-hidden="true" />
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
