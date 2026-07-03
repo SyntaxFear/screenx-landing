@@ -478,6 +478,13 @@ dd {
     linear-gradient(120deg, rgba(184, 219, 198, 0.20), transparent 46%);
 }
 
+.section-interface {
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #eef4f0 0%, #f7faf7 46%, #edf4ef 100%),
+    linear-gradient(115deg, rgba(182, 207, 232, 0.22), transparent 42%);
+}
+
 .section-install {
   background: linear-gradient(180deg, #eef4f0, #f8fbf8);
 }
@@ -494,6 +501,20 @@ dd {
 .section-heading {
   max-width: 760px;
   margin-bottom: 36px;
+}
+
+.showcase-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(280px, 0.54fr);
+  gap: 34px;
+  align-items: end;
+  margin-bottom: 30px;
+}
+
+.showcase-head p:last-child {
+  margin-bottom: 4px;
+  color: var(--slate);
+  line-height: 1.65;
 }
 
 .signal-row {
@@ -605,6 +626,136 @@ dd {
   color: var(--ink);
   background: var(--mint);
   border-radius: 8px;
+}
+
+.interface-stage {
+  position: relative;
+  min-height: 720px;
+  margin-top: 26px;
+}
+
+.interface-stage::before {
+  position: absolute;
+  inset: 50px 7% 84px;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(30, 36, 34, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(30, 36, 34, 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  border: 1px solid rgba(30, 36, 34, 0.06);
+  border-radius: 8px;
+  mask-image: linear-gradient(180deg, transparent, black 16%, black 84%, transparent);
+}
+
+.interface-window {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  padding: 10px 10px 12px;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 8px;
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(22px);
+}
+
+.interface-window img,
+.interface-card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.interface-window figcaption {
+  display: grid;
+  gap: 3px;
+  padding: 10px 4px 0;
+}
+
+.interface-window figcaption strong,
+.interface-card h3 {
+  color: var(--ink);
+}
+
+.interface-window figcaption span,
+.interface-card p {
+  color: var(--slate);
+  line-height: 1.45;
+}
+
+.interface-window figcaption strong {
+  font-size: 14px;
+}
+
+.interface-window figcaption span {
+  font-size: 13px;
+}
+
+.interface-window-main {
+  top: 66px;
+  left: -18px;
+  width: min(850px, 72%);
+  animation: interfaceFloat 8s ease-in-out infinite;
+}
+
+.interface-window-settings {
+  top: 0;
+  right: -12px;
+  z-index: 2;
+  width: min(448px, 39%);
+  animation: interfaceFloat 8.6s ease-in-out infinite reverse;
+}
+
+.interface-window-guide {
+  right: 46px;
+  bottom: 8px;
+  z-index: 3;
+  width: min(472px, 42%);
+  animation: interfaceFloat 9.2s ease-in-out infinite;
+  animation-delay: -2.8s;
+}
+
+.interface-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.interface-card {
+  overflow: hidden;
+  min-height: 320px;
+  padding: 10px 10px 18px;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 8px;
+  box-shadow: 0 18px 54px rgba(30, 36, 34, 0.11);
+  backdrop-filter: blur(18px);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.interface-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 70px rgba(30, 36, 34, 0.15);
+}
+
+.interface-card-image {
+  aspect-ratio: 1.32;
+  object-fit: cover;
+  object-position: top left;
+  margin-bottom: 16px;
+  background: #1f2321;
+}
+
+.interface-card h3 {
+  margin: 0 8px 8px;
+  font-size: 18px;
+}
+
+.interface-card p {
+  margin: 0 8px;
+  font-size: 14px;
 }
 
 .split-layout,
@@ -1015,6 +1166,17 @@ code {
   }
 }
 
+@keyframes interfaceFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
 @media (max-width: 980px) {
   .feature-grid,
   .split-layout,
@@ -1024,6 +1186,35 @@ code {
   }
 
   .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .showcase-head {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .interface-stage {
+    display: grid;
+    gap: 16px;
+    min-height: 0;
+  }
+
+  .interface-stage::before {
+    display: none;
+  }
+
+  .interface-window,
+  .interface-window-main,
+  .interface-window-settings,
+  .interface-window-guide {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    animation: none;
+  }
+
+  .interface-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1155,12 +1346,21 @@ code {
 
   .feature-grid,
   .signal-row,
+  .interface-strip,
   .archive-meta {
     grid-template-columns: 1fr;
   }
 
   .feature-card {
     min-height: 220px;
+  }
+
+  .interface-card {
+    min-height: 0;
+  }
+
+  .interface-card-image {
+    aspect-ratio: 1.48;
   }
 
   .visual-grid {

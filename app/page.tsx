@@ -65,6 +65,33 @@ const productSignals = [
   ["Fast restore", "Saved layouts for repeated work"],
 ];
 
+const interfaceScreens = [
+  {
+    title: "Arrange",
+    description: "Preset layouts, per-screen profiles, and the custom grid in one workspace.",
+    src: "/images/screens/screenx-arrange.png",
+    alt: "ScreenX Arrange screen showing preset layouts, display profiles, and custom grid controls.",
+  },
+  {
+    title: "Settings",
+    description: "Permission status, default spacing, placement shortcut, and modifier controls.",
+    src: "/images/screens/screenx-settings.png",
+    alt: "ScreenX Settings screen showing accessibility status, window gap, hotkey, and modifier options.",
+  },
+  {
+    title: "Guide",
+    description: "A short in-app guide that helps new users start arranging windows quickly.",
+    src: "/images/screens/screenx-guide.png",
+    alt: "ScreenX Guide screen showing quick start steps and main feature cards.",
+  },
+  {
+    title: "About",
+    description: "Version, creator links, website, and update status in a native macOS view.",
+    src: "/images/screens/screenx-about.png",
+    alt: "ScreenX About screen showing app version, creator links, and update controls.",
+  },
+];
+
 const workflow = [
   "Download the notarized DMG.",
   "Drag ScreenX into Applications.",
@@ -92,6 +119,7 @@ export default function Home() {
           </Link>
           <nav className="site-nav" aria-label="Primary navigation">
             <a href="#features">Features</a>
+            <a href="#screens">Screens</a>
             <a href="#install">Install</a>
             <Link href="/releases">Releases</Link>
           </nav>
@@ -209,6 +237,80 @@ export default function Home() {
                 </StaggerItem>
               );
             })}
+          </Stagger>
+        </div>
+      </section>
+
+      <section id="screens" className="section section-interface">
+        <div className="section-inner">
+          <Reveal className="showcase-head">
+            <p className="eyebrow">App interface</p>
+            <h2>See the real ScreenX controls before you install.</h2>
+            <p>
+              ScreenX keeps the macOS interface familiar: a native sidebar, practical controls,
+              visible shortcuts, and clear screens for arranging, learning, and updating the app.
+            </p>
+          </Reveal>
+
+          <Reveal className="interface-stage" aria-label="ScreenX application screenshots">
+            <figure className="interface-window interface-window-main">
+              <Image
+                src={interfaceScreens[0].src}
+                alt={interfaceScreens[0].alt}
+                width={1232}
+                height={898}
+                sizes="(max-width: 980px) 100vw, 820px"
+              />
+              <figcaption>
+                <strong>{interfaceScreens[0].title}</strong>
+                <span>{interfaceScreens[0].description}</span>
+              </figcaption>
+            </figure>
+
+            <figure className="interface-window interface-window-float interface-window-settings">
+              <Image
+                src={interfaceScreens[1].src}
+                alt={interfaceScreens[1].alt}
+                width={1232}
+                height={898}
+                sizes="(max-width: 980px) 100vw, 430px"
+              />
+              <figcaption>
+                <strong>{interfaceScreens[1].title}</strong>
+                <span>{interfaceScreens[1].description}</span>
+              </figcaption>
+            </figure>
+
+            <figure className="interface-window interface-window-float interface-window-guide">
+              <Image
+                src={interfaceScreens[2].src}
+                alt={interfaceScreens[2].alt}
+                width={1232}
+                height={898}
+                sizes="(max-width: 980px) 100vw, 450px"
+              />
+              <figcaption>
+                <strong>{interfaceScreens[2].title}</strong>
+                <span>{interfaceScreens[2].description}</span>
+              </figcaption>
+            </figure>
+          </Reveal>
+
+          <Stagger className="interface-strip" delay={0.08} aria-label="More ScreenX screens">
+            {interfaceScreens.map((screen) => (
+              <StaggerItem className="interface-card" key={screen.title}>
+                <Image
+                  className="interface-card-image"
+                  src={screen.src}
+                  alt={screen.alt}
+                  width={1232}
+                  height={898}
+                  sizes="(max-width: 680px) 100vw, (max-width: 980px) 50vw, 25vw"
+                />
+                <h3>{screen.title}</h3>
+                <p>{screen.description}</p>
+              </StaggerItem>
+            ))}
           </Stagger>
         </div>
       </section>
