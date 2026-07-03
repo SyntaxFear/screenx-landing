@@ -17,6 +17,27 @@ export type ScreenXRelease = {
 
 export const releases: ScreenXRelease[] = [
   {
+    version: "1.0.2",
+    build: "5",
+    date: "2026-07-03",
+    title: "ScreenX 1.0.2",
+    summary: "Marks ScreenX as an open-source macOS app and points the app, website, and release metadata to the public project repository.",
+    minMacOS: "13.0",
+    fileName: "ScreenX-1.0.2.dmg",
+    fileSizeBytes: 3652210,
+    sha256: "491122d2e1be63958898d2f2e40a4bde342852e36e3edd51b4b5e380238efb31",
+    notarized: true,
+    stapled: true,
+    downloadPath: "/releases/1.0.2/ScreenX-1.0.2.dmg",
+    releaseNotesPath: "/releases#version-1-0-2",
+    highlights: [
+      "About now links directly to the public ScreenX project repository.",
+      "The landing page GitHub link now opens the ScreenX source code.",
+      "Adds the MIT open-source license to the app repository.",
+      "Includes the latest signed, notarized, and stapled public DMG.",
+    ],
+  },
+  {
     version: "1.0.1",
     build: "4",
     date: "2026-07-03",

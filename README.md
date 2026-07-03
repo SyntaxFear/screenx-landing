@@ -37,7 +37,7 @@ site URL during local or preview deployments.
 
 ## Release Layout
 
-- Latest DMG: `public/releases/1.0.0/ScreenX-1.0.0.dmg`
+- Latest DMG: `public/releases/1.0.2/ScreenX-1.0.2.dmg`
 - Update feed: `/api/update`
 - Full release archive: `/api/releases`
 - Latest download redirect: `/download`
