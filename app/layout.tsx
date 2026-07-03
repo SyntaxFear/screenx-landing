@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 
-const siteURL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://screenx-landing.vercel.app";
+const siteURL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://screenx.scrubmac.app";
 
 const manrope = Manrope({
   subsets: ["latin"],

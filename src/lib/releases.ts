@@ -18,14 +18,14 @@ export type ScreenXRelease = {
 export const releases: ScreenXRelease[] = [
   {
     version: "1.0.0",
-    build: "2",
+    build: "3",
     date: "2026-07-03",
     title: "ScreenX 1.0.0",
     summary: "Initial public release with drag placement, quick layouts, per-screen grids, saved layouts, and a built-in guide.",
     minMacOS: "13.0",
     fileName: "ScreenX-1.0.0.dmg",
-    fileSizeBytes: 3651235,
-    sha256: "cbafa77a18ebce80f9b203f032f355705cfb30c695e3a1489069eeb99584e4de",
+    fileSizeBytes: 3651250,
+    sha256: "61444549399e35409422fe07838637d2af3e38a830de15f5c3dfc5ebf6e2a8e3",
     notarized: true,
     stapled: true,
     downloadPath: "/releases/1.0.0/ScreenX-1.0.0.dmg",
