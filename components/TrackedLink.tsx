@@ -21,6 +21,11 @@ export function TrackedLink({
   onClick,
   ...props
 }: TrackedLinkProps) {
+  const shouldUseBrowserNavigation =
+    href.startsWith("/download") ||
+    href.includes(".dmg") ||
+    Boolean(props.download);
+
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     onClick?.(event);
 
@@ -29,7 +34,7 @@ export function TrackedLink({
     }
   }
 
-  if (href.startsWith("/")) {
+  if (href.startsWith("/") && !shouldUseBrowserNavigation) {
     return (
       <Link href={href} onClick={handleClick} {...props}>
         {children}
