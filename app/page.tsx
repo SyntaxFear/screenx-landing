@@ -109,27 +109,35 @@ const hotkeyGuides = [
 const interfaceScreens = [
   {
     title: "Arrange",
-    description: "Preset layouts, per-screen profiles, and the custom grid in one workspace.",
+    label: "Build the canvas",
+    description: "Create the grid for each display, choose fast presets, and set gaps before placing windows.",
+    bestPractice: "Use 3 x 1 for wide monitors, 1 x 2 for vertical displays, and 0 px gaps when you want edge-to-edge tiling.",
     src: "/images/screens/screenx-arrange.png",
     alt: "ScreenX Arrange screen showing preset layouts, display profiles, and custom grid controls.",
   },
   {
+    title: "Windows",
+    label: "Pick the target",
+    description: "Select the exact open window you want to move, then apply left, right, maximize, or any canvas placement.",
+    bestPractice: "Use this screen when several windows from the same app are open, so ScreenX moves the correct one.",
+    src: "/images/screens/screenx-windows.png",
+    alt: "ScreenX Windows screen showing open windows and quick placement controls.",
+  },
+  {
+    title: "Saved",
+    label: "Restore a workspace",
+    description: "Capture your current desktop arrangement and bring the same workspace back later.",
+    bestPractice: "Save repeated setups like writing, design review, or coding, then restore them after connecting displays.",
+    src: "/images/screens/screenx-saved.png",
+    alt: "ScreenX Saved screen showing workspace capture and restore controls.",
+  },
+  {
     title: "Settings",
-    description: "Permission status, default spacing, placement shortcut, and modifier controls.",
+    label: "Tune the controls",
+    description: "Change the drag modifier, placement canvas shortcut, quick-layout modifiers, and default spacing.",
+    bestPractice: "Keep Command as the default drag modifier if Option conflicts with macOS, then customize shortcuts as your habits settle.",
     src: "/images/screens/screenx-settings.png",
     alt: "ScreenX Settings screen showing accessibility status, window gap, hotkey, and modifier options.",
-  },
-  {
-    title: "Guide",
-    description: "A short in-app guide that helps new users start arranging windows quickly.",
-    src: "/images/screens/screenx-guide.png",
-    alt: "ScreenX Guide screen showing quick start steps and main feature cards.",
-  },
-  {
-    title: "About",
-    description: "Version, creator links, website, and update status in a native macOS view.",
-    src: "/images/screens/screenx-about.png",
-    alt: "ScreenX About screen showing app version, creator links, and update controls.",
   },
 ];
 
@@ -160,7 +168,7 @@ export default function Home() {
           </Link>
           <nav className="site-nav" aria-label="Primary navigation">
             <a href="#features">Features</a>
-            <a href="#guide">Guide</a>
+            <a href="#how-to-use">How it works</a>
             <a href="#screens">Screens</a>
             <a href="#install">Install</a>
             <Link href="/releases">Releases</Link>
@@ -193,7 +201,7 @@ export default function Home() {
               <Download size={18} aria-hidden="true" />
               Download for macOS
             </Link>
-            <a className="button button-secondary" href="#guide">
+            <a className="button button-secondary" href="#how-to-use">
               See how it works
               <ChevronRight size={18} aria-hidden="true" />
             </a>
@@ -283,7 +291,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="guide" className="section section-guide">
+      <section id="how-to-use" className="section section-guide">
         <div className="section-inner">
           <Reveal className="guide-head">
             <div>
@@ -292,8 +300,8 @@ export default function Home() {
             </div>
             <p>
               Think of each display as a canvas. ScreenX lets you choose a space visually,
-              with a keyboard shortcut, or from a simple grid. The app includes the same guide
-              inside ScreenX, so new users can learn while they work.
+              with a keyboard shortcut, or from a simple grid. Start with the presets, then
+              save the arrangements you use every day.
             </p>
           </Reveal>
 
@@ -323,7 +331,7 @@ export default function Home() {
               </p>
               <div className="guide-note">
                 <Keyboard size={18} aria-hidden="true" />
-                <span>No memorizing required. Open the in-app Guide any time to see the controls again.</span>
+                <span>No memorizing required. The landing page and Settings screen keep the important controls visible.</span>
               </div>
             </Reveal>
 
@@ -355,17 +363,17 @@ export default function Home() {
             <h2>See the real ScreenX controls before you install.</h2>
             <p>
               ScreenX keeps the macOS interface familiar: a native sidebar, practical controls,
-              visible shortcuts, and clear screens for arranging, learning, and updating the app.
+              visible shortcuts, and focused screens for arranging, choosing, saving, and tuning windows.
             </p>
           </Reveal>
 
           <Reveal className="interface-stage" aria-label="ScreenX application screenshots">
-            <figure className="interface-window interface-window-main">
+            <figure className="interface-window interface-window-featured">
               <Image
                 src={interfaceScreens[0].src}
                 alt={interfaceScreens[0].alt}
-                width={1232}
-                height={898}
+                width={1188}
+                height={854}
                 sizes="(max-width: 980px) 100vw, 820px"
               />
               <figcaption>
@@ -374,48 +382,36 @@ export default function Home() {
               </figcaption>
             </figure>
 
-            <figure className="interface-window interface-window-float interface-window-settings">
-              <Image
-                src={interfaceScreens[1].src}
-                alt={interfaceScreens[1].alt}
-                width={1232}
-                height={898}
-                sizes="(max-width: 980px) 100vw, 430px"
-              />
-              <figcaption>
-                <strong>{interfaceScreens[1].title}</strong>
-                <span>{interfaceScreens[1].description}</span>
-              </figcaption>
-            </figure>
-
-            <figure className="interface-window interface-window-float interface-window-guide">
-              <Image
-                src={interfaceScreens[2].src}
-                alt={interfaceScreens[2].alt}
-                width={1232}
-                height={898}
-                sizes="(max-width: 980px) 100vw, 450px"
-              />
-              <figcaption>
-                <strong>{interfaceScreens[2].title}</strong>
-                <span>{interfaceScreens[2].description}</span>
-              </figcaption>
-            </figure>
+            <div className="interface-window-stack" aria-label="Additional ScreenX screens">
+              {interfaceScreens.slice(1).map((screen) => (
+                <figure className="interface-window interface-window-compact" key={screen.title}>
+                  <Image
+                    src={screen.src}
+                    alt={screen.alt}
+                    width={1188}
+                    height={854}
+                    sizes="(max-width: 980px) 100vw, 430px"
+                  />
+                  <figcaption>
+                    <strong>{screen.title}</strong>
+                    <span>{screen.description}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </Reveal>
 
-          <Stagger className="interface-strip" delay={0.08} aria-label="More ScreenX screens">
-            {interfaceScreens.map((screen) => (
-              <StaggerItem className="interface-card" key={screen.title}>
-                <Image
-                  className="interface-card-image"
-                  src={screen.src}
-                  alt={screen.alt}
-                  width={1232}
-                  height={898}
-                  sizes="(max-width: 680px) 100vw, (max-width: 980px) 50vw, 25vw"
-                />
+          <Stagger className="screen-context-grid" delay={0.08} aria-label="ScreenX screen explanations">
+            {interfaceScreens.map((screen, index) => (
+              <StaggerItem className="screen-context-card" key={screen.title}>
+                <span className="screen-context-number">0{index + 1}</span>
+                <span className="screen-context-label">{screen.label}</span>
                 <h3>{screen.title}</h3>
                 <p>{screen.description}</p>
+                <div className="screen-context-best">
+                  <strong>Best practice</strong>
+                  <span>{screen.bestPractice}</span>
+                </div>
               </StaggerItem>
             ))}
           </Stagger>
@@ -459,7 +455,7 @@ export default function Home() {
               <div className="visual-cell">Center</div>
               <div className="visual-cell">Right</div>
               <div className="visual-cell wide">Saved workspace</div>
-              <div className="visual-cell">Guide</div>
+              <div className="visual-cell">Settings</div>
             </div>
             <div className="visual-cursor">
               <MousePointer2 size={17} aria-hidden="true" />

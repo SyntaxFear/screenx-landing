@@ -782,13 +782,17 @@ dd {
 
 .interface-stage {
   position: relative;
-  min-height: 720px;
-  margin-top: 26px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.36fr) minmax(320px, 0.74fr);
+  gap: 18px;
+  align-items: start;
+  margin-top: 30px;
 }
 
 .interface-stage::before {
   position: absolute;
-  inset: 50px 7% 84px;
+  inset: 22px -18px 22px;
+  z-index: 0;
   content: "";
   background:
     linear-gradient(90deg, rgba(30, 36, 34, 0.045) 1px, transparent 1px),
@@ -800,8 +804,12 @@ dd {
 }
 
 .interface-window {
-  position: absolute;
+  position: relative;
   z-index: 1;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
   margin: 0;
   padding: 10px 10px 12px;
   background: rgba(255, 255, 255, 0.66);
@@ -811,12 +819,34 @@ dd {
   backdrop-filter: blur(22px);
 }
 
-.interface-window img,
-.interface-card-image {
+.interface-window img {
   display: block;
   width: 100%;
   height: auto;
   border-radius: 8px;
+  background: #1f2321;
+  object-fit: cover;
+  object-position: top left;
+}
+
+.interface-window-featured img {
+  aspect-ratio: 1188 / 854;
+}
+
+.interface-window-stack {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.interface-window-compact {
+  padding: 8px 8px 10px;
+}
+
+.interface-window-compact img {
+  aspect-ratio: 1.72;
 }
 
 .interface-window figcaption {
@@ -826,12 +856,13 @@ dd {
 }
 
 .interface-window figcaption strong,
-.interface-card h3 {
+.screen-context-card h3 {
   color: var(--ink);
 }
 
 .interface-window figcaption span,
-.interface-card p {
+.screen-context-card p,
+.screen-context-best span {
   color: var(--slate);
   line-height: 1.45;
 }
@@ -844,41 +875,21 @@ dd {
   font-size: 13px;
 }
 
-.interface-window-main {
-  top: 66px;
-  left: -18px;
-  width: min(850px, 72%);
-  animation: interfaceFloat 8s ease-in-out infinite;
-}
-
-.interface-window-settings {
-  top: 0;
-  right: -12px;
-  z-index: 2;
-  width: min(448px, 39%);
-  animation: interfaceFloat 8.6s ease-in-out infinite reverse;
-}
-
-.interface-window-guide {
-  right: 46px;
-  bottom: 8px;
-  z-index: 3;
-  width: min(472px, 42%);
-  animation: interfaceFloat 9.2s ease-in-out infinite;
-  animation-delay: -2.8s;
-}
-
-.interface-strip {
+.screen-context-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
-  margin-top: 18px;
+  margin-top: 22px;
+  align-items: stretch;
 }
 
-.interface-card {
+.screen-context-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  min-height: 320px;
-  padding: 10px 10px 18px;
+  min-height: 318px;
+  padding: 20px;
   background: rgba(255, 255, 255, 0.68);
   border: 1px solid rgba(255, 255, 255, 0.82);
   border-radius: 8px;
@@ -887,27 +898,77 @@ dd {
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
-.interface-card:hover {
+.screen-context-card::after {
+  position: absolute;
+  inset: auto 16px 16px auto;
+  width: 82px;
+  height: 82px;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(30, 36, 34, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(30, 36, 34, 0.08) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.28;
+  mask-image: linear-gradient(135deg, transparent, black);
+  pointer-events: none;
+}
+
+.screen-context-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 24px 70px rgba(30, 36, 34, 0.15);
 }
 
-.interface-card-image {
-  aspect-ratio: 1.32;
-  object-fit: cover;
-  object-position: top left;
-  margin-bottom: 16px;
-  background: #1f2321;
+.screen-context-number {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: rgba(30, 36, 34, 0.26);
+  font-size: 24px;
+  font-weight: 900;
 }
 
-.interface-card h3 {
-  margin: 0 8px 8px;
+.screen-context-label {
+  width: fit-content;
+  margin-bottom: 18px;
+  padding: 7px 10px;
+  color: #43514d;
+  background: rgba(238, 244, 240, 0.78);
+  border: 1px solid rgba(30, 36, 34, 0.08);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.screen-context-card h3 {
+  margin: 0 0 8px;
   font-size: 18px;
 }
 
-.interface-card p {
-  margin: 0 8px;
+.screen-context-card p {
+  margin: 0 0 18px;
   font-size: 14px;
+}
+
+.screen-context-best {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 5px;
+  margin-top: auto;
+  padding: 13px;
+  background: rgba(238, 244, 240, 0.72);
+  border: 1px solid rgba(30, 36, 34, 0.08);
+  border-radius: 8px;
+}
+
+.screen-context-best strong {
+  color: var(--ink);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.screen-context-best span {
+  font-size: 13px;
 }
 
 .split-layout,
@@ -1367,24 +1428,18 @@ code {
   .interface-stage {
     display: grid;
     gap: 16px;
-    min-height: 0;
+    grid-template-columns: 1fr;
   }
 
   .interface-stage::before {
     display: none;
   }
 
-  .interface-window,
-  .interface-window-main,
-  .interface-window-settings,
-  .interface-window-guide {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    animation: none;
+  .interface-window-stack {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .interface-strip {
+  .screen-context-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1517,7 +1572,7 @@ code {
   .feature-grid,
   .guide-step-grid,
   .signal-row,
-  .interface-strip,
+  .screen-context-grid,
   .archive-meta {
     grid-template-columns: 1fr;
   }
@@ -1535,11 +1590,15 @@ code {
     padding: 22px;
   }
 
-  .interface-card {
+  .interface-window-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .screen-context-card {
     min-height: 0;
   }
 
-  .interface-card-image {
+  .interface-window-compact img {
     aspect-ratio: 1.48;
   }
 
