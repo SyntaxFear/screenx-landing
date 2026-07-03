@@ -5,7 +5,7 @@ export const siteURL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://screenx.scru
 export const seoTitle = "ScreenX - Mac Window Manager with Drag Preview and Custom Grids";
 
 export const seoDescription =
-  "ScreenX is an open-source macOS window manager for Command-drag previews, quick layouts, per-screen grids, saved workspaces, and precise window snapping.";
+  "ScreenX is an open-source macOS window manager for Shift-drag previews, quick layouts, per-screen grids, saved workspaces, and precise window snapping.";
 
 export const seoKeywords = [
   "ScreenX",
@@ -15,7 +15,7 @@ export const seoKeywords = [
   "window tiling macOS",
   "macOS split screen",
   "Mac desktop organization",
-  "Command drag window layout",
+  "Shift drag window layout",
   "per-screen grids",
   "saved workspaces",
   "open source macOS app",
@@ -92,7 +92,7 @@ export function softwareApplicationJsonLd() {
     fileSize: `${(latestRelease.fileSizeBytes / 1_000_000).toFixed(1)} MB`,
     description: seoDescription,
     featureList: [
-      "Command-drag window placement with live preview",
+      "Shift-drag window placement with live preview",
       "Quick layout hotkeys for halves, thirds, quarters, center, maximize, and two-thirds layouts",
       "Per-screen rows, columns, and gap settings",
       "Saved workspaces for repeated desktop arrangements",

@@ -1,6 +1,6 @@
 # ScreenX
 
-> ScreenX is an open-source native macOS window manager for arranging app windows with Command-drag previews, quick layout hotkeys, per-screen grids, and saved workspaces.
+> ScreenX is an open-source native macOS window manager for arranging app windows with Shift-drag previews, quick layout hotkeys, per-screen grids, and saved workspaces.
 
 ## Product
 
@@ -23,8 +23,9 @@
 - License: MIT open source.
 - Source repository: https://github.com/SyntaxFear/screenX
 - Distribution: direct DMG download, Developer ID signed, Apple-notarized, and stapled.
-- Current version: 1.0.2.
-- Core workflow: hold Command while dragging a window to preview and place it.
+- Current version: 1.0.3.
+- Core workflow: hold Shift while dragging a window to preview and place it.
+- Default quick layouts: Control + Command with arrows, M, C, U, I, J, K, and 1-5.
 - Quick layouts: halves, thirds, quarters, center, maximize, and two-thirds layouts.
 - Display support: per-screen rows, columns, gaps, and saved display profiles.
 - Workspace support: save and restore repeated window arrangements.

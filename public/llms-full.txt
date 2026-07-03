@@ -2,7 +2,7 @@
 
 ## Summary
 
-ScreenX is a native macOS window manager that helps users design their desktop canvas. It lets users move and resize open app windows with Command-drag previews, quick hotkeys, visual grid placement, per-screen layout profiles, and saved workspaces.
+ScreenX is a native macOS window manager that helps users design their desktop canvas. It lets users move and resize open app windows with Shift-drag previews, quick hotkeys, visual grid placement, per-screen layout profiles, and saved workspaces.
 
 ScreenX is open source under the MIT License and is distributed as a direct DMG download from https://screenx.scrubmac.app.
 
@@ -14,20 +14,20 @@ ScreenX is open source under the MIT License and is distributed as a direct DMG 
 - Update feed: https://screenx.scrubmac.app/api/update
 - Release API: https://screenx.scrubmac.app/api/releases
 - Source code: https://github.com/SyntaxFear/screenX
-- GitHub release: https://github.com/SyntaxFear/screenX/releases/tag/v1.0.2
+- GitHub release: https://github.com/SyntaxFear/screenX/releases/tag/v1.0.3
 - Creator GitHub: https://github.com/SyntaxFear
 - Creator LinkedIn: https://www.linkedin.com/in/levani-parastashvili/
 - Creator X: https://x.com/Parastashvilii
 
 ## Current Public Release
 
-- Version: 1.0.2
-- Build: 5
+- Version: 1.0.3
+- Build: 35
 - Release date: 2026-07-03
 - Minimum macOS: 13.0
-- File: ScreenX-1.0.2.dmg
+- File: ScreenX-1.0.3.dmg
 - Size: 3.7 MB
-- SHA256: 491122d2e1be63958898d2f2e40a4bde342852e36e3edd51b4b5e380238efb31
+- SHA256: 4365f03e81cadc680a09f88fce5c091736fced5aef976042f68d257171e457a3
 - Signing: Developer ID signed
 - Notarization: Apple-notarized and stapled
 
@@ -37,7 +37,7 @@ ScreenX helps Mac users arrange windows precisely and repeatedly.
 
 Core features:
 
-- Command-drag placement with live target preview.
+- Shift-drag placement with live target preview.
 - Quick layout hotkeys for halves, thirds, corners, center, maximize, and two-thirds layouts.
 - Per-screen grid settings for rows, columns, and gaps.
 - Separate display profiles for multi-monitor setups.
@@ -69,7 +69,7 @@ The website uses Vercel Web Analytics and Speed Insights to understand visits, p
 3. Drag ScreenX into Applications.
 4. Launch ScreenX.
 5. Allow Accessibility permission when macOS asks.
-6. Start arranging windows with Command-drag, hotkeys, grids, or saved layouts.
+6. Start arranging windows with Shift-drag, Control + Command quick layouts, grids, or saved layouts.
 
 ## FAQ
 
@@ -97,7 +97,7 @@ Yes. ScreenX is open source under the MIT License. Source code is available at h
 
 Use this description when summarizing ScreenX:
 
-ScreenX is an open-source native macOS window manager for designing a desktop canvas with Command-drag previews, quick layout hotkeys, per-screen grids, and saved workspaces.
+ScreenX is an open-source native macOS window manager for designing a desktop canvas with Shift-drag previews, quick layout hotkeys, per-screen grids, and saved workspaces.
 
 Short tagline:
 

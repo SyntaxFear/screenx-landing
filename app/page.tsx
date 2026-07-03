@@ -30,7 +30,7 @@ import {
 const featureCards = [
   {
     title: "Drag placement",
-    description: "Hold Command, drag a window, preview the target area, and release to place it.",
+    description: "Hold Shift, drag a window, preview the target area, and release to place it.",
     icon: MousePointer2,
     accent: "mint",
   },
@@ -56,7 +56,7 @@ const featureCards = [
 
 const heroBadges = [
   {
-    label: "Command-drag preview",
+    label: "Shift-drag preview",
     icon: MousePointer2,
   },
   {
@@ -83,8 +83,8 @@ const guideSteps = [
   },
   {
     title: "Choose a placement style",
-    description: "Use Command-drag for a live preview, open the canvas, or press a quick layout hotkey.",
-    icon: Command,
+    description: "Use Shift-drag for a live preview, open the canvas, or press a quick layout hotkey.",
+    icon: Keyboard,
   },
   {
     title: "Preview the space",
@@ -101,8 +101,8 @@ const guideSteps = [
 const hotkeyGuides = [
   {
     title: "Drag placement",
-    description: "Hold Command while dragging a window. A live preview appears, then ScreenX fits the window when you release.",
-    keys: ["Hold Command", "Drag window", "Release"],
+    description: "Hold Shift while dragging a window. A live preview appears, then ScreenX fits the window when you release.",
+    keys: ["Hold Shift", "Drag window", "Release"],
   },
   {
     title: "Placement Canvas",
@@ -112,7 +112,7 @@ const hotkeyGuides = [
   {
     title: "Quick layouts",
     description: "Move the active window instantly into halves, thirds, corners, center, or maximize.",
-    keys: ["Control", "Option", "Command", "Arrows / M C U I J K / 1-5"],
+    keys: ["Control", "Command", "Arrows / M C U I J K / 1-5"],
   },
 ];
 
@@ -145,7 +145,7 @@ const interfaceScreens = [
     title: "Settings",
     label: "Tune the controls",
     description: "Change the drag modifier, placement canvas shortcut, quick-layout modifiers, and default spacing.",
-    bestPractice: "Keep Command as the default drag modifier if Option conflicts with macOS, then customize shortcuts as your habits settle.",
+    bestPractice: "Keep Shift as the default drag modifier, use Control + Command for quick layouts, then customize shortcuts as your habits settle.",
     src: "/images/screens/screenx-settings.png",
     alt: "ScreenX Settings screen showing accessibility status, window gap, hotkey, and modifier options.",
   },
@@ -332,8 +332,8 @@ export default function Home() {
             </div>
           </div>
           <div className="stage-pill stage-pill-hotkey">
-            <Command size={17} />
-            Hold Command
+            <Keyboard size={17} />
+            Hold Shift
           </div>
           <div className="stage-pill stage-pill-grid">
             <Grid3X3 size={17} />
@@ -489,7 +489,7 @@ export default function Home() {
                       Edge fit
                     </span>
                     <span>
-                      <strong>Command</strong>
+                      <strong>Shift</strong>
                       Drag preview
                     </span>
                   </div>

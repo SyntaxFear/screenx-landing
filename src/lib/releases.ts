@@ -17,6 +17,27 @@ export type ScreenXRelease = {
 
 export const releases: ScreenXRelease[] = [
   {
+    version: "1.0.3",
+    build: "35",
+    date: "2026-07-03",
+    title: "ScreenX 1.0.3",
+    summary: "Simplifies quick layout access to Control + Command, preserves Settings customization, and includes the latest placement fixes for ScreenX's own window.",
+    minMacOS: "13.0",
+    fileName: "ScreenX-1.0.3.dmg",
+    fileSizeBytes: 3708495,
+    sha256: "4365f03e81cadc680a09f88fce5c091736fced5aef976042f68d257171e457a3",
+    notarized: true,
+    stapled: true,
+    downloadPath: "/releases/1.0.3/ScreenX-1.0.3.dmg",
+    releaseNotesPath: "/releases#version-1-0-3",
+    highlights: [
+      "Quick Layout defaults now use Control + Command instead of Control + Option + Command.",
+      "Settings still lets users choose their own quick layout modifier keys.",
+      "Direct canvas placement now targets ScreenX's own app window correctly.",
+      "Includes the latest signed, notarized, and stapled public DMG.",
+    ],
+  },
+  {
     version: "1.0.2",
     build: "5",
     date: "2026-07-03",
