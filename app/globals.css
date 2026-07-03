@@ -786,16 +786,6 @@ dd {
   box-shadow: var(--shadow);
 }
 
-.installer-preview::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background: linear-gradient(115deg, transparent 22%, rgba(255, 255, 255, 0.42) 42%, transparent 58%);
-  transform: translateX(-120%);
-  animation: cellSheen 5.4s ease-in-out infinite;
-  pointer-events: none;
-}
-
 .installer-preview img {
   display: block;
   width: 100%;

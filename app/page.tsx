@@ -276,10 +276,10 @@ export default function Home() {
           </Reveal>
           <Reveal className="installer-preview">
             <Image
-              src="/images/dmg-installer-background.png"
-              alt="ScreenX drag-to-Applications installer background"
-              width={760}
-              height={480}
+              src="/images/dmg-installer-preview.png"
+              alt="ScreenX drag-to-Applications installer window"
+              width={753}
+              height={441}
               sizes="(max-width: 900px) 100vw, 520px"
             />
           </Reveal>
