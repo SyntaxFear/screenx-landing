@@ -1,4 +1,4 @@
-import { absoluteURL, releases } from "@/src/lib/releases";
+import { absoluteURL, downloadRoute, releases } from "@/src/lib/releases";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 300;
@@ -10,7 +10,7 @@ export function GET(request: Request) {
     latest: releases[0].version,
     releases: releases.map((release) => ({
       ...release,
-      downloadURL: absoluteURL(origin, release.downloadPath),
+      downloadURL: absoluteURL(origin, downloadRoute(release.version, "api_releases")),
       releaseNotesURL: absoluteURL(origin, release.releaseNotesPath),
     })),
   });

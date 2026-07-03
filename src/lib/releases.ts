@@ -83,8 +83,18 @@ export const releases: ScreenXRelease[] = [
 
 export const latestRelease = releases[0];
 
+export function findRelease(version: string | null | undefined) {
+  return releases.find((release) => release.version === version);
+}
+
 export function absoluteURL(origin: string, path: string) {
   return new URL(path, origin).toString();
+}
+
+export function downloadRoute(version: string, source: string) {
+  const params = new URLSearchParams({ version, source });
+
+  return `/download?${params.toString()}`;
 }
 
 export function formatBytes(bytes: number) {

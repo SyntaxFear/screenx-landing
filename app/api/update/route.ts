@@ -1,4 +1,4 @@
-import { absoluteURL, latestRelease } from "@/src/lib/releases";
+import { absoluteURL, downloadRoute, latestRelease } from "@/src/lib/releases";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 300;
@@ -8,7 +8,7 @@ export function GET(request: Request) {
 
   return Response.json({
     version: latestRelease.version,
-    downloadURL: absoluteURL(origin, latestRelease.downloadPath),
+    downloadURL: absoluteURL(origin, downloadRoute(latestRelease.version, "app_update")),
     releaseNotesURL: absoluteURL(origin, latestRelease.releaseNotesPath),
   });
 }

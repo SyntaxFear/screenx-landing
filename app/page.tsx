@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   Archive,
   Check,
@@ -15,7 +14,10 @@ import {
   Sparkles,
 } from "lucide-react";
 import { HeroReveal, Reveal, Stagger, StaggerItem } from "@/components/MotionPrimitives";
-import { formatBytes, latestRelease, releaseId } from "@/src/lib/releases";
+import { SectionViewTracker } from "@/components/SectionViewTracker";
+import { TrackedLink } from "@/components/TrackedLink";
+import { analyticsEvents } from "@/src/lib/analytics";
+import { downloadRoute, formatBytes, latestRelease, releaseId } from "@/src/lib/releases";
 
 const featureCards = [
   {
@@ -148,10 +150,21 @@ const workflow = [
   "Arrange the active window with drag, canvas, or hotkeys.",
 ];
 
+const homeSections = [
+  { id: "hero", label: "Hero" },
+  { id: "features", label: "Features" },
+  { id: "how-to-use", label: "How to use" },
+  { id: "screens", label: "App interface" },
+  { id: "how-it-works", label: "Workspace canvas" },
+  { id: "install", label: "Install" },
+  { id: "release", label: "Latest release" },
+];
+
 export default function Home() {
   return (
     <main>
-      <section className="hero-section" aria-labelledby="hero-title">
+      <SectionViewTracker page="home" sections={homeSections} />
+      <section id="hero" className="hero-section" aria-labelledby="hero-title">
         <Image
           className="hero-image"
           src="/images/screenx-hero-workspace.png"
@@ -162,16 +175,52 @@ export default function Home() {
         />
         <div className="hero-overlay" />
         <header className="site-header">
-          <Link className="brand-link" href="/" aria-label="ScreenX home">
+          <TrackedLink
+            className="brand-link"
+            eventName={analyticsEvents.navigationClick}
+            eventProperties={{ destination: "home", location: "header_brand", page: "home" }}
+            href="/"
+            aria-label="ScreenX home"
+          >
             <Image src="/images/screenx-icon.png" alt="" width={36} height={36} priority />
             <span>ScreenX</span>
-          </Link>
+          </TrackedLink>
           <nav className="site-nav" aria-label="Primary navigation">
-            <a href="#features">Features</a>
-            <a href="#how-to-use">How it works</a>
-            <a href="#screens">Screens</a>
-            <a href="#install">Install</a>
-            <Link href="/releases">Releases</Link>
+            <TrackedLink
+              eventName={analyticsEvents.navigationClick}
+              eventProperties={{ destination: "features", location: "header_nav", page: "home" }}
+              href="#features"
+            >
+              Features
+            </TrackedLink>
+            <TrackedLink
+              eventName={analyticsEvents.navigationClick}
+              eventProperties={{ destination: "how_to_use", location: "header_nav", page: "home" }}
+              href="#how-to-use"
+            >
+              How it works
+            </TrackedLink>
+            <TrackedLink
+              eventName={analyticsEvents.navigationClick}
+              eventProperties={{ destination: "screens", location: "header_nav", page: "home" }}
+              href="#screens"
+            >
+              Screens
+            </TrackedLink>
+            <TrackedLink
+              eventName={analyticsEvents.navigationClick}
+              eventProperties={{ destination: "install", location: "header_nav", page: "home" }}
+              href="#install"
+            >
+              Install
+            </TrackedLink>
+            <TrackedLink
+              eventName={analyticsEvents.navigationClick}
+              eventProperties={{ destination: "releases", location: "header_nav", page: "home" }}
+              href="/releases"
+            >
+              Releases
+            </TrackedLink>
           </nav>
         </header>
 
@@ -197,14 +246,29 @@ export default function Home() {
             })}
           </div>
           <div className="hero-actions" aria-label="Download actions">
-            <Link className="button button-primary" href="/download">
+            <TrackedLink
+              className="button button-primary"
+              eventName={analyticsEvents.downloadClick}
+              eventProperties={{
+                location: "hero",
+                page: "home",
+                source: "hero_primary",
+                version: latestRelease.version,
+              }}
+              href={downloadRoute(latestRelease.version, "hero_primary")}
+            >
               <Download size={18} aria-hidden="true" />
               Download for macOS
-            </Link>
-            <a className="button button-secondary" href="#how-to-use">
+            </TrackedLink>
+            <TrackedLink
+              className="button button-secondary"
+              eventName={analyticsEvents.ctaClick}
+              eventProperties={{ destination: "how_to_use", location: "hero", page: "home" }}
+              href="#how-to-use"
+            >
               See how it works
               <ChevronRight size={18} aria-hidden="true" />
-            </a>
+            </TrackedLink>
           </div>
           <dl className="release-strip" aria-label="Latest release details">
             <div>
@@ -520,7 +584,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section-release">
+      <section id="release" className="section section-release">
         <div className="section-inner release-layout">
           <Reveal>
             <p className="eyebrow">Latest release</p>
@@ -551,14 +615,29 @@ export default function Home() {
             </div>
             <code>{latestRelease.sha256}</code>
             <div className="release-panel-actions">
-              <Link className="button button-primary" href={latestRelease.downloadPath}>
+              <TrackedLink
+                className="button button-primary"
+                eventName={analyticsEvents.downloadClick}
+                eventProperties={{
+                  location: "latest_release_panel",
+                  page: "home",
+                  source: "home_release_panel",
+                  version: latestRelease.version,
+                }}
+                href={downloadRoute(latestRelease.version, "home_release_panel")}
+              >
                 <Download size={18} aria-hidden="true" />
                 Download {latestRelease.version}
-              </Link>
-              <Link className="button button-secondary" href="/releases">
+              </TrackedLink>
+              <TrackedLink
+                className="button button-secondary"
+                eventName={analyticsEvents.navigationClick}
+                eventProperties={{ destination: "releases", location: "latest_release_panel", page: "home" }}
+                href="/releases"
+              >
                 Older versions
                 <ChevronRight size={18} aria-hidden="true" />
-              </Link>
+              </TrackedLink>
             </div>
           </Reveal>
         </div>
@@ -570,18 +649,36 @@ export default function Home() {
           <span>ScreenX</span>
         </div>
         <nav aria-label="Creator links">
-          <a href="https://github.com/SyntaxFear/screenX" rel="noreferrer" target="_blank">
+          <TrackedLink
+            eventName={analyticsEvents.externalLinkClick}
+            eventProperties={{ destination: "github", location: "footer", page: "home" }}
+            href="https://github.com/SyntaxFear/screenX"
+            rel="noreferrer"
+            target="_blank"
+          >
             GitHub
             <ExternalLink size={14} aria-hidden="true" />
-          </a>
-          <a href="https://www.linkedin.com/in/levani-parastashvili/" rel="noreferrer" target="_blank">
+          </TrackedLink>
+          <TrackedLink
+            eventName={analyticsEvents.externalLinkClick}
+            eventProperties={{ destination: "linkedin", location: "footer", page: "home" }}
+            href="https://www.linkedin.com/in/levani-parastashvili/"
+            rel="noreferrer"
+            target="_blank"
+          >
             LinkedIn
             <ExternalLink size={14} aria-hidden="true" />
-          </a>
-          <a href="https://x.com/Parastashvilii" rel="noreferrer" target="_blank">
+          </TrackedLink>
+          <TrackedLink
+            eventName={analyticsEvents.externalLinkClick}
+            eventProperties={{ destination: "x", location: "footer", page: "home" }}
+            href="https://x.com/Parastashvilii"
+            rel="noreferrer"
+            target="_blank"
+          >
             X
             <ExternalLink size={14} aria-hidden="true" />
-          </a>
+          </TrackedLink>
         </nav>
       </footer>
     </main>

@@ -1,29 +1,48 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { Check, Download, Home } from "lucide-react";
-import { formatBytes, releaseId, releases } from "@/src/lib/releases";
+import { SectionViewTracker } from "@/components/SectionViewTracker";
+import { TrackedLink } from "@/components/TrackedLink";
+import { analyticsEvents } from "@/src/lib/analytics";
+import { downloadRoute, formatBytes, releaseId, releases } from "@/src/lib/releases";
 
 export const metadata: Metadata = {
   title: "Releases",
   description: "Download the latest and older notarized ScreenX releases for macOS.",
 };
 
+const releasePageSections = [
+  { id: "release-archive-hero", label: "Release archive hero" },
+  { id: "release-archive-list", label: "Release archive list" },
+];
+
 export default function ReleasesPage() {
   return (
     <main className="archive-page">
+      <SectionViewTracker page="releases" sections={releasePageSections} />
       <header className="archive-header">
-        <Link className="brand-link" href="/" aria-label="ScreenX home">
+        <TrackedLink
+          className="brand-link"
+          eventName={analyticsEvents.navigationClick}
+          eventProperties={{ destination: "home", location: "archive_header_brand", page: "releases" }}
+          href="/"
+          aria-label="ScreenX home"
+        >
           <Image src="/images/screenx-icon.png" alt="" width={36} height={36} />
           <span>ScreenX</span>
-        </Link>
-        <Link className="button button-secondary" href="/">
+        </TrackedLink>
+        <TrackedLink
+          className="button button-secondary"
+          eventName={analyticsEvents.navigationClick}
+          eventProperties={{ destination: "home", location: "archive_header", page: "releases" }}
+          href="/"
+        >
           <Home size={18} aria-hidden="true" />
           Home
-        </Link>
+        </TrackedLink>
       </header>
 
-      <section className="archive-hero">
+      <section id="release-archive-hero" className="archive-hero">
         <p className="eyebrow">Release archive</p>
         <h1>Download ScreenX for macOS.</h1>
         <p>
@@ -32,7 +51,7 @@ export default function ReleasesPage() {
         </p>
       </section>
 
-      <section className="archive-list" aria-label="ScreenX releases">
+      <section id="release-archive-list" className="archive-list" aria-label="ScreenX releases">
         {releases.map((release) => (
           <article className="archive-card" id={releaseId(release.version)} key={release.version}>
             <div className="archive-card-main">
@@ -41,10 +60,20 @@ export default function ReleasesPage() {
                 <h2>{release.title}</h2>
                 <p>{release.summary}</p>
               </div>
-              <Link className="button button-primary" href={release.downloadPath}>
+              <TrackedLink
+                className="button button-primary"
+                eventName={analyticsEvents.downloadClick}
+                eventProperties={{
+                  location: "release_archive_card",
+                  page: "releases",
+                  source: "release_archive",
+                  version: release.version,
+                }}
+                href={downloadRoute(release.version, "release_archive")}
+              >
                 <Download size={18} aria-hidden="true" />
                 Download
-              </Link>
+              </TrackedLink>
             </div>
             <dl className="archive-meta">
               <div>

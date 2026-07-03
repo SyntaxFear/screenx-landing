@@ -44,6 +44,19 @@ site URL during local or preview deployments.
 
 When publishing a new version, add a new folder under `public/releases/<version>/`, update `src/lib/releases.ts`, and keep older versions in place.
 
+## Analytics
+
+The site uses Vercel Web Analytics and Speed Insights.
+
+- Page views, visitors, referrers, countries, devices, and popular pages come from Vercel Web Analytics.
+- Real-user loading and web-vitals data comes from Vercel Speed Insights.
+- `Section Viewed` events show which homepage and release-page sections visitors actually reach.
+- `CTA Click`, `Navigation Click`, and `External Link Click` events show how visitors move through the page.
+- `Download Click` tracks visible download button clicks.
+- `Download Started` is emitted by `/download` before redirecting to the DMG, including version, source, and whether it is the latest release.
+
+Enable Web Analytics and Speed Insights for the Vercel project dashboard after deployment if they are not already enabled.
+
 ## Open Source Notes
 
 This repo is open source so users can inspect the download flow, release
