@@ -1,9 +1,10 @@
-import { NextResponse } from "next/server";
 import { track } from "@vercel/analytics/server";
 import { analyticsEvents, safeAnalyticsValue } from "@/src/lib/analytics";
 import { findRelease, latestRelease } from "@/src/lib/releases";
+import { downloadReleaseFile } from "@/src/lib/server/download-file";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function GET(request: Request) {
   const requestURL = new URL(request.url);
@@ -31,5 +32,5 @@ export async function GET(request: Request) {
     // Downloads should keep working even if analytics is blocked or unavailable.
   }
 
-  return NextResponse.redirect(new URL(release.downloadPath, request.url));
+  return downloadReleaseFile(release);
 }
