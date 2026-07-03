@@ -18,6 +18,14 @@ import { SectionViewTracker } from "@/components/SectionViewTracker";
 import { TrackedLink } from "@/components/TrackedLink";
 import { analyticsEvents } from "@/src/lib/analytics";
 import { downloadRoute, formatBytes, latestRelease, releaseId } from "@/src/lib/releases";
+import {
+  faqItems,
+  faqJsonLd,
+  jsonLdScript,
+  organizationJsonLd,
+  softwareApplicationJsonLd,
+  webSiteJsonLd,
+} from "@/src/lib/seo";
 
 const featureCards = [
   {
@@ -158,13 +166,27 @@ const homeSections = [
   { id: "how-it-works", label: "Workspace canvas" },
   { id: "install", label: "Install" },
   { id: "release", label: "Latest release" },
+  { id: "faq", label: "FAQ" },
 ];
+
+const homeJsonLd = [softwareApplicationJsonLd(), webSiteJsonLd(), organizationJsonLd(), faqJsonLd()];
 
 export default function Home() {
   return (
-    <main>
-      <SectionViewTracker page="home" sections={homeSections} />
-      <section id="hero" className="hero-section" aria-labelledby="hero-title">
+    <>
+      {homeJsonLd.map((item, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLdScript(item)}
+        />
+      ))}
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <main id="main" tabIndex={-1}>
+        <SectionViewTracker page="home" sections={homeSections} />
+        <section id="hero" className="hero-section" aria-labelledby="hero-title">
         <Image
           className="hero-image"
           src="/images/screenx-hero-workspace.png"
@@ -324,7 +346,7 @@ export default function Home() {
         </HeroReveal>
       </section>
 
-      <section id="features" className="section section-light">
+        <section id="features" className="section section-light">
         <div className="section-inner">
           <Reveal className="section-heading">
             <p className="eyebrow">Main features</p>
@@ -355,7 +377,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="how-to-use" className="section section-guide">
+        <section id="how-to-use" className="section section-guide">
         <div className="section-inner">
           <Reveal className="guide-head">
             <div>
@@ -420,7 +442,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="screens" className="section section-interface">
+        <section id="screens" className="section section-interface">
         <div className="section-inner">
           <Reveal className="showcase-head">
             <p className="eyebrow">App interface</p>
@@ -511,7 +533,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="how-it-works" className="section section-canvas">
+        <section id="how-it-works" className="section section-canvas">
         <div className="section-inner split-layout">
           <Reveal className="copy-column">
             <p className="eyebrow">Workspace canvas</p>
@@ -558,7 +580,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="install" className="section section-install">
+        <section id="install" className="section section-install">
         <div className="section-inner install-layout">
           <Reveal>
             <p className="eyebrow">Install</p>
@@ -584,7 +606,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="release" className="section section-release">
+        <section id="release" className="section section-release">
         <div className="section-inner release-layout">
           <Reveal>
             <p className="eyebrow">Latest release</p>
@@ -643,12 +665,61 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="site-footer">
+        <section id="faq" className="section section-faq">
+          <div className="section-inner">
+            <Reveal className="section-heading">
+              <p className="eyebrow">FAQ</p>
+              <h2>Clear answers before you install.</h2>
+              <p>
+                ScreenX is built for normal Mac users who want predictable window placement without
+                adding a complicated workspace system.
+              </p>
+            </Reveal>
+            <Stagger className="faq-grid" delay={0.06}>
+              {faqItems.map((item) => (
+                <StaggerItem className="faq-card" key={item.question}>
+                  <h3>{item.question}</h3>
+                  <p>{item.answer}</p>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </section>
+
+        <footer className="site-footer">
         <div>
           <Image src="/images/screenx-icon.png" alt="" width={40} height={40} />
           <span>ScreenX</span>
         </div>
         <nav aria-label="Creator links">
+          <TrackedLink
+            eventName={analyticsEvents.navigationClick}
+            eventProperties={{ destination: "releases", location: "footer", page: "home" }}
+            href="/releases"
+          >
+            Releases
+          </TrackedLink>
+          <TrackedLink
+            eventName={analyticsEvents.navigationClick}
+            eventProperties={{ destination: "privacy", location: "footer", page: "home" }}
+            href="/privacy"
+          >
+            Privacy
+          </TrackedLink>
+          <TrackedLink
+            eventName={analyticsEvents.navigationClick}
+            eventProperties={{ destination: "terms", location: "footer", page: "home" }}
+            href="/terms"
+          >
+            Terms
+          </TrackedLink>
+          <TrackedLink
+            eventName={analyticsEvents.navigationClick}
+            eventProperties={{ destination: "llms", location: "footer", page: "home" }}
+            href="/llms.txt"
+          >
+            LLMs
+          </TrackedLink>
           <TrackedLink
             eventName={analyticsEvents.externalLinkClick}
             eventProperties={{ destination: "github", location: "footer", page: "home" }}
@@ -680,7 +751,8 @@ export default function Home() {
             <ExternalLink size={14} aria-hidden="true" />
           </TrackedLink>
         </nav>
-      </footer>
-    </main>
+        </footer>
+      </main>
+    </>
   );
 }

@@ -1,0 +1,28 @@
+{
+  "name": "ScreenX",
+  "short_name": "ScreenX",
+  "description": "Open-source macOS window manager for drag previews, quick layouts, per-screen grids, and saved workspaces.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#eef4f0",
+  "theme_color": "#eef4f0",
+  "icons": [
+    {
+      "src": "/images/favicon-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

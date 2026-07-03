@@ -5,10 +5,21 @@ import { SectionViewTracker } from "@/components/SectionViewTracker";
 import { TrackedLink } from "@/components/TrackedLink";
 import { analyticsEvents } from "@/src/lib/analytics";
 import { downloadRoute, formatBytes, releaseId, releases } from "@/src/lib/releases";
+import { breadcrumbJsonLd, jsonLdScript, releasesJsonLd, seoImage, sitePath } from "@/src/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Releases",
-  description: "Download the latest and older notarized ScreenX releases for macOS.",
+  title: "ScreenX Releases - Download notarized macOS builds",
+  description:
+    "Download the latest and older ScreenX DMG releases for macOS. Every public build is Developer ID signed, notarized, stapled, and published with SHA256.",
+  alternates: {
+    canonical: "/releases",
+  },
+  openGraph: {
+    title: "ScreenX Releases - Download notarized macOS builds",
+    description: "Download current and older signed, notarized ScreenX releases for macOS.",
+    url: sitePath("/releases"),
+    images: [seoImage],
+  },
 };
 
 const releasePageSections = [
@@ -19,6 +30,13 @@ const releasePageSections = [
 export default function ReleasesPage() {
   return (
     <main className="archive-page">
+      {[releasesJsonLd(), breadcrumbJsonLd()].map((item, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLdScript(item)}
+        />
+      ))}
       <SectionViewTracker page="releases" sections={releasePageSections} />
       <header className="archive-header">
         <TrackedLink
