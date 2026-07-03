@@ -65,6 +65,47 @@ const productSignals = [
   ["Fast restore", "Saved layouts for repeated work"],
 ];
 
+const guideSteps = [
+  {
+    title: "Pick the app window",
+    description: "Click the app you want to move. ScreenX works with the active window on your Mac.",
+    icon: MousePointer2,
+  },
+  {
+    title: "Choose a placement style",
+    description: "Use Command-drag for a live preview, open the canvas, or press a quick layout hotkey.",
+    icon: Command,
+  },
+  {
+    title: "Preview the space",
+    description: "ScreenX shows the target area first so you can see where the window will land.",
+    icon: Grid3X3,
+  },
+  {
+    title: "Let ScreenX fit it",
+    description: "Release or choose the zone, and ScreenX moves the window into that exact area.",
+    icon: Check,
+  },
+];
+
+const hotkeyGuides = [
+  {
+    title: "Drag placement",
+    description: "Hold Command while dragging a window. A live preview appears, then ScreenX fits the window when you release.",
+    keys: ["Hold Command", "Drag window", "Release"],
+  },
+  {
+    title: "Placement Canvas",
+    description: "Open the full-screen canvas when you want to choose a grid area without dragging.",
+    keys: ["Control", "Option", "Space"],
+  },
+  {
+    title: "Quick layouts",
+    description: "Move the active window instantly into halves, thirds, corners, center, or maximize.",
+    keys: ["Control", "Option", "Command", "Arrows / M C U I J K / 1-5"],
+  },
+];
+
 const interfaceScreens = [
   {
     title: "Arrange",
@@ -119,6 +160,7 @@ export default function Home() {
           </Link>
           <nav className="site-nav" aria-label="Primary navigation">
             <a href="#features">Features</a>
+            <a href="#guide">Guide</a>
             <a href="#screens">Screens</a>
             <a href="#install">Install</a>
             <Link href="/releases">Releases</Link>
@@ -151,7 +193,7 @@ export default function Home() {
               <Download size={18} aria-hidden="true" />
               Download for macOS
             </Link>
-            <a className="button button-secondary" href="#how-it-works">
+            <a className="button button-secondary" href="#guide">
               See how it works
               <ChevronRight size={18} aria-hidden="true" />
             </a>
@@ -238,6 +280,71 @@ export default function Home() {
               );
             })}
           </Stagger>
+        </div>
+      </section>
+
+      <section id="guide" className="section section-guide">
+        <div className="section-inner">
+          <Reveal className="guide-head">
+            <div>
+              <p className="eyebrow">How to use ScreenX</p>
+              <h2>Move windows without learning a complicated tool.</h2>
+            </div>
+            <p>
+              Think of each display as a canvas. ScreenX lets you choose a space visually,
+              with a keyboard shortcut, or from a simple grid. The app includes the same guide
+              inside ScreenX, so new users can learn while they work.
+            </p>
+          </Reveal>
+
+          <Stagger className="guide-step-grid" delay={0.06}>
+            {guideSteps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <StaggerItem className="guide-step-card" key={step.title}>
+                  <div className="guide-step-number">{index + 1}</div>
+                  <div className="icon-surface">
+                    <Icon size={22} aria-hidden="true" />
+                  </div>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </StaggerItem>
+              );
+            })}
+          </Stagger>
+
+          <div className="hotkey-layout">
+            <Reveal className="hotkey-copy">
+              <p className="eyebrow">Default controls</p>
+              <h2>Hotkeys are visible, editable, and made for normal Mac users.</h2>
+              <p>
+                ScreenX starts with sensible defaults. You can change the drag modifier,
+                placement canvas shortcut, and quick-layout modifier keys from Settings.
+              </p>
+              <div className="guide-note">
+                <Keyboard size={18} aria-hidden="true" />
+                <span>No memorizing required. Open the in-app Guide any time to see the controls again.</span>
+              </div>
+            </Reveal>
+
+            <Stagger className="hotkey-stack" delay={0.08} aria-label="ScreenX default hotkeys">
+              {hotkeyGuides.map((item) => (
+                <StaggerItem className="hotkey-card" key={item.title}>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                  <div className="keycap-row" aria-label={`${item.title} keys`}>
+                    {item.keys.map((key) => (
+                      <span className="keycap" key={key}>
+                        {key}
+                      </span>
+                    ))}
+                  </div>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
         </div>
       </section>
 

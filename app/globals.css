@@ -472,6 +472,12 @@ dd {
     linear-gradient(90deg, rgba(182, 207, 232, 0.14), rgba(233, 194, 189, 0.10));
 }
 
+.section-guide {
+  background:
+    linear-gradient(180deg, #eef4f0 0%, #f8fbf8 54%, #eef4f0 100%),
+    linear-gradient(90deg, rgba(184, 219, 198, 0.16), rgba(233, 194, 189, 0.10));
+}
+
 .section-canvas {
   background:
     linear-gradient(180deg, #f4f7f4, #edf4ef),
@@ -515,6 +521,152 @@ dd {
   margin-bottom: 4px;
   color: var(--slate);
   line-height: 1.65;
+}
+
+.guide-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.6fr);
+  gap: 34px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.guide-head p:last-child,
+.hotkey-copy p {
+  color: var(--slate);
+  line-height: 1.65;
+}
+
+.guide-step-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.guide-step-card,
+.hotkey-card {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.guide-step-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 286px;
+  padding: 20px;
+}
+
+.guide-step-number {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  color: #43514d;
+  background: rgba(238, 244, 240, 0.78);
+  border: 1px solid rgba(30, 36, 34, 0.08);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.guide-step-card p,
+.hotkey-card p {
+  margin-bottom: 0;
+  color: var(--slate);
+  line-height: 1.58;
+}
+
+.hotkey-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 26px;
+}
+
+.hotkey-copy {
+  padding: 28px;
+  background: rgba(30, 36, 34, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  box-shadow: var(--shadow-strong);
+}
+
+.hotkey-copy .eyebrow,
+.hotkey-copy h2 {
+  color: white;
+}
+
+.hotkey-copy p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.guide-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 26px;
+  padding: 14px;
+  color: rgba(255, 255, 255, 0.84);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.guide-note svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--mint);
+}
+
+.hotkey-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.hotkey-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(220px, 0.72fr);
+  gap: 18px;
+  align-items: center;
+  min-height: 150px;
+  padding: 18px;
+}
+
+.hotkey-card h3 {
+  margin-bottom: 8px;
+}
+
+.keycap-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.keycap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 12px;
+  color: #26302d;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(238, 244, 240, 0.86));
+  border: 1px solid rgba(30, 36, 34, 0.12);
+  border-bottom-color: rgba(30, 36, 34, 0.22);
+  border-radius: 8px;
+  box-shadow: 0 7px 14px rgba(30, 36, 34, 0.08);
+  font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .signal-row {
@@ -1189,9 +1341,27 @@ code {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .guide-head,
   .showcase-head {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .guide-step-grid,
+  .hotkey-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-step-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hotkey-card {
+    grid-template-columns: 1fr;
+  }
+
+  .keycap-row {
+    justify-content: flex-start;
   }
 
   .interface-stage {
@@ -1345,6 +1515,7 @@ code {
   }
 
   .feature-grid,
+  .guide-step-grid,
   .signal-row,
   .interface-strip,
   .archive-meta {
@@ -1353,6 +1524,15 @@ code {
 
   .feature-card {
     min-height: 220px;
+  }
+
+  .guide-step-card,
+  .hotkey-card {
+    min-height: 0;
+  }
+
+  .hotkey-copy {
+    padding: 22px;
   }
 
   .interface-card {
