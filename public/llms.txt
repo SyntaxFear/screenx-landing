@@ -23,7 +23,7 @@
 - License: MIT open source.
 - Source repository: https://github.com/SyntaxFear/screenX
 - Distribution: direct DMG download, Developer ID signed, Apple-notarized, and stapled.
-- Current version: 1.0.3.
+- Current version: 1.0.6.
 - Core workflow: hold Shift while dragging a window to preview and place it.
 - Default quick layouts: Control + Command with arrows, M, C, U, I, J, K, and 1-5.
 - Quick layouts: halves, thirds, quarters, center, maximize, and two-thirds layouts.

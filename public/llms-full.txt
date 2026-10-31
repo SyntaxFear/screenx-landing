@@ -14,20 +14,20 @@ ScreenX is open source under the MIT License and is distributed as a direct DMG 
 - Update feed: https://screenx.scrubmac.app/api/update
 - Release API: https://screenx.scrubmac.app/api/releases
 - Source code: https://github.com/SyntaxFear/screenX
-- GitHub release: https://github.com/SyntaxFear/screenX/releases/tag/v1.0.3
+- GitHub releases: https://github.com/SyntaxFear/screenX/releases
 - Creator GitHub: https://github.com/SyntaxFear
 - Creator LinkedIn: https://www.linkedin.com/in/levani-parastashvili/
 - Creator X: https://x.com/Parastashvilii
 
 ## Current Public Release
 
-- Version: 1.0.3
-- Build: 35
-- Release date: 2026-07-03
+- Version: 1.0.6
+- Build: 86
+- Release date: 2026-07-19
 - Minimum macOS: 13.0
-- File: ScreenX-1.0.3.dmg
-- Size: 3.7 MB
-- SHA256: 4365f03e81cadc680a09f88fce5c091736fced5aef976042f68d257171e457a3
+- File: ScreenX-1.0.6.dmg
+- Size: 3.8 MB
+- SHA256: b24467310417259705504166cd6c60ffa5628f8a3c7a883693c2e03a801f156c
 - Signing: Developer ID signed
 - Notarization: Apple-notarized and stapled
 
@@ -44,6 +44,7 @@ Core features:
 - Saved workspaces for restoring repeated arrangements.
 - Settings for changing drag modifier and quick-layout shortcut behavior.
 - Native macOS UI and direct DMG installation.
+- Menu-bar-only operation with no Dock icon and automatic startup enabled by default.
 
 ## Typical Use Cases
 
